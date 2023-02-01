@@ -1,6 +1,8 @@
 // variale global para ataque 
 let ataqueJugador
 let ataqueEnemigo
+let vidasJugador = 3
+let vidasEnemigo = 3
 
 //Función para seleccionar el elemento mascota/registro del evento boton de seleccionar mascota jugador 
 function iniciarJuego() {
@@ -92,17 +94,56 @@ function ataqueAleatorioEnemigo() {
     } else {
         ataqueEnemigo = 'TIERRA'
     }
-    crearMensaje()
+    combate()
 }
+
+//función para ver el resultado del combate
+function combate() {
+let spanVidasJugador = document.getElementById('vidas-jugador')
+let spanVidasEnemigo = document.getElementById('vidas-enemigo')
+
+    if ( ataqueJugador == ataqueEnemigo ) {
+        crearMensaje( "¡EMPATE! 🤼" );
+    } else if ( ataqueJugador == 'FUEGO' && ataqueEnemigo == 'TIERRA' ) {
+        crearMensaje( "¡GANASTE! 🥳" )
+        vidasEnemigo--
+        spanVidasEnemigo.innerHTML = vidasEnemigo
+    } else if ( ataqueJugador == 'AGUA' && ataqueEnemigo == 'FUEGO' ) {
+        crearMensaje( "¡GANASTE! 🥳" )
+        vidasEnemigo--
+        spanVidasEnemigo.innerHTML = vidasEnemigo
+    } else if ( ataqueJugador == 'TIERRA' && ataqueEnemigo == 'AGUA' ) {
+        crearMensaje( "¡GANASTE! 🥳" )
+        vidasEnemigo--
+        spanVidasEnemigo.innerHTML = vidasEnemigo
+    } else {
+        crearMensaje( "PERDISTE... 😢" )
+        vidasJugador--
+        spanVidasJugador.innerHTML = vidasJugador
+    }
+    revisarVidas()
+}
+
+function revisarVidas(){
+    if (vidasEnemigo == 0){
+        alert('FELICITACIONES! Ganaste 😜')
+    } else if (vidasJugador == 0) {
+       alert('Lo siento, perdiste 😢')
+    }
+    
+} 
+
 // función para crear mensaje del ataque 
-function crearMensaje() {
+function crearMensaje(resultado) {
     let sectionMensajes = document.getElementById('mensaje')
 
     let parrafo = document.createElement('p')
-    parrafo.innerHTML = 'Tu mascota ataco con ' + ataqueJugador + ', las mascotas del enemigo atacó con ' + ataqueEnemigo + 'Pendiete'
+    parrafo.innerHTML = 'Tu mascota ataco con ' + ataqueJugador + ', las mascotas del enemigo atacó con ' + ataqueEnemigo + ' ' +  resultado
 
     sectionMensajes.appendChild(parrafo)
 }
+
+
 
 //función y ecuacion matemática para que la pc escoja aleatoriamnete 
 function numeroAleatorio( min , max ) {
