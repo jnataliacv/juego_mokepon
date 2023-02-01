@@ -1,7 +1,11 @@
+
+//Función para seleccionar el elemento mascota/registro del evento boton de seleccionar mascota jugador 
 function iniciarJuego() {
     let botonMascotaJugador = document.getElementById('boton-mascota')
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
 }
+
+//Funcion y l
 function seleccionarMascotaJugador() {
     let inputHipodoge = document.getElementById('hipodoge')
     let inputCapipepo = document.getElementById('capipepo')
@@ -26,5 +30,31 @@ function seleccionarMascotaJugador() {
     } else {
         alert('Debes seleccionar una mascota')
     }
+
+    seleccionarMascotaEnemigo()
 }
+
+function seleccionarMascotaEnemigo() {
+    let ataqueAleatorio = numeroAleatorio(1,6)
+    let spanMascotaEnemigo = document.getElementById('mascota-enemigo')
+
+    if (ataqueAleatorio == 1) {
+        spanMascotaEnemigo.innerHTML = 'Hipodoge'
+    } else if (ataqueAleatorio == 2) {
+        spanMascotaEnemigo.innerHTML = 'capipepo'
+    }else if (ataqueAleatorio == 3) {
+        spanMascotaEnemigo.innerHTML = 'ratigueya'
+    }else if (ataqueAleatorio == 4) {
+        spanMascotaEnemigo.innerHTML = 'langostelvis'
+    }else if (ataqueAleatorio == 5) {
+        spanMascotaEnemigo.innerHTML = 'tucapalma'
+    }else {
+        spanMascotaEnemigo.innerHTML = 'pydos'
+    }
+
+}
+function numeroAleatorio( min , max ) {
+    return Math.floor( Math.random() * ( max - min + 1 ) + min );
+}
+
 window.addEventListener('load', iniciarJuego)
