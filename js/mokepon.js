@@ -175,6 +175,7 @@ function crearMensaje(resultado) {
 
 //Función para crear mensaje final de la partida 
 function crearMensajeFinal(resultadoFinal) {
+    //variable para unir con el parrafo mensaje que salga la parte final si ganaste o perdiste
     let sectionMensajes = document.getElementById('mensaje')
     let parrafo = document.createElement('p')
     parrafo.innerHTML = resultadoFinal
@@ -188,6 +189,7 @@ function crearMensajeFinal(resultadoFinal) {
     let botonTierra = document.getElementById('boton-tierra')
     botonTierra.disabled = true
 
+    //variable para mostrar el boton de reiniciar 
     let sectionReiniciar = document.getElementById('reiniciar')
     sectionReiniciar.style.display = 'block'
 }
