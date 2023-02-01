@@ -1,5 +1,6 @@
 // variale global para ataque 
 let ataqueJugador
+let ataqueEnemigo
 
 //Función para seleccionar el elemento mascota/registro del evento boton de seleccionar mascota jugador 
 function iniciarJuego() {
@@ -45,18 +46,18 @@ function seleccionarMascotaJugador() {
 
 //Función y lógica de la mascota que escoge el pc
 function seleccionarMascotaEnemigo() {
-    let ataqueAleatorio = numeroAleatorio(1,6)
+    let mascotaAleatorio = numeroAleatorio(1,6)
     let spanMascotaEnemigo = document.getElementById('mascota-enemigo')
 
-    if (ataqueAleatorio == 1) {
+    if (mascotaAleatorio == 1) {
         spanMascotaEnemigo.innerHTML = 'Hipodoge'
-    } else if (ataqueAleatorio == 2) {
+    } else if (mascotaAleatorio == 2) {
         spanMascotaEnemigo.innerHTML = 'capipepo'
-    }else if (ataqueAleatorio == 3) {
+    }else if (mascotaAleatorio == 3) {
         spanMascotaEnemigo.innerHTML = 'ratigueya'
-    }else if (ataqueAleatorio == 4) {
+    }else if (mascotaAleatorio == 4) {
         spanMascotaEnemigo.innerHTML = 'langostelvis'
-    }else if (ataqueAleatorio == 5) {
+    }else if (mascotaAleatorio == 5) {
         spanMascotaEnemigo.innerHTML = 'tucapalma'
     }else {
         spanMascotaEnemigo.innerHTML = 'pydos'
@@ -64,18 +65,45 @@ function seleccionarMascotaEnemigo() {
 
 }
 
+//funcione ataque jugador fuego
 function ataqueFuego() {
     ataqueJugador = 'FUEGO'
-    alert(ataqueJugador)
+    ataqueAleatorioEnemigo()
 }
+//funcione ataque jugador agua
 function ataqueAgua() {
     ataqueJugador = 'AGUA'
-    alert(ataqueJugador)
+    ataqueAleatorioEnemigo()
 }
-function ataqueAleatorio() {
+//funcione ataque jugador tierra
+function ataqueTierra() {
     ataqueJugador = 'TIERRA'
-    alert(ataqueJugador)
+    ataqueAleatorioEnemigo()
 }
+
+//función para el ataque aleatorio del pc
+function ataqueAleatorioEnemigo() {
+    let ataqueAleatorio =  numeroAleatorio(1,3)
+
+    if (ataqueAleatorio == 1){
+        ataqueEnemigo = 'FUEGO'
+    } else  if (ataqueAleatorio == 2){
+        ataqueEnemigo = 'AGUA'
+    } else {
+        ataqueEnemigo = 'TIERRA'
+    }
+    crearMensaje()
+}
+// función para crear mensaje del ataque 
+function crearMensaje() {
+    let sectionMensajes = document.getElementById('mensaje')
+
+    let parrafo = document.createElement('p')
+    parrafo.innerHTML = 'Tu mascota ataco con ' + ataqueJugador + ', las mascotas del enemigo atacó con ' + ataqueEnemigo + 'Pendiete'
+
+    sectionMensajes.appendChild(parrafo)
+}
+
 //función y ecuacion matemática para que la pc escoja aleatoriamnete 
 function numeroAleatorio( min , max ) {
     return Math.floor( Math.random() * ( max - min + 1 ) + min );
