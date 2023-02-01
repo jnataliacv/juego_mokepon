@@ -15,6 +15,8 @@ function iniciarJuego() {
     botonAgua.addEventListener('click', ataqueAgua)
     let botonTierra = document.getElementById('boton-tierra')
     botonTierra.addEventListener('click', ataqueTierra)
+    let botonReiniciar = document.getElementById('boton-reiniciar')
+    botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 //Función y lógica de la mascota que escoge el jugador 
@@ -67,23 +69,23 @@ function seleccionarMascotaEnemigo() {
 
 }
 
-//funcione ataque jugador fuego
+//Función ataque jugador fuego
 function ataqueFuego() {
     ataqueJugador = 'FUEGO'
     ataqueAleatorioEnemigo()
 }
-//funcione ataque jugador agua
+//Función ataque jugador agua
 function ataqueAgua() {
     ataqueJugador = 'AGUA'
     ataqueAleatorioEnemigo()
 }
-//funcione ataque jugador tierra
+//Función ataque jugador tierra
 function ataqueTierra() {
     ataqueJugador = 'TIERRA'
     ataqueAleatorioEnemigo()
 }
 
-//función para el ataque aleatorio del pc
+//Función para el ataque aleatorio del pc
 function ataqueAleatorioEnemigo() {
     let ataqueAleatorio =  numeroAleatorio(1,3)
 
@@ -97,7 +99,7 @@ function ataqueAleatorioEnemigo() {
     combate()
 }
 
-//función para ver el resultado del combate
+//Función para ver el resultado del combate por cada ataque
 function combate() {
 let spanVidasJugador = document.getElementById('vidas-jugador')
 let spanVidasEnemigo = document.getElementById('vidas-enemigo')
@@ -123,17 +125,17 @@ let spanVidasEnemigo = document.getElementById('vidas-enemigo')
     }
     revisarVidas()
 }
-
+//Función para ver el  resusltado final 
 function revisarVidas(){
     if (vidasEnemigo == 0){
-        alert('FELICITACIONES! Ganaste 😜')
+        crearMensajeFinal('FELICITACIONES! Ganaste 😜')
     } else if (vidasJugador == 0) {
-       alert('Lo siento, perdiste 😢')
+        crearMensajeFinal('Lo siento, perdiste 😢')
     }
     
 } 
 
-// función para crear mensaje del ataque 
+//Función para crear mensaje del ataque 
 function crearMensaje(resultado) {
     let sectionMensajes = document.getElementById('mensaje')
 
@@ -143,9 +145,27 @@ function crearMensaje(resultado) {
     sectionMensajes.appendChild(parrafo)
 }
 
+//Función para crear mensaje final de la partida y variables con disabled para que no funcionen mas los botones
+function crearMensajeFinal(resultadoFinal) {
+    let sectionMensajes = document.getElementById('mensaje')
+    let parrafo = document.createElement('p')
+    parrafo.innerHTML = resultadoFinal
+    sectionMensajes.appendChild(parrafo)
 
+    let botonFuego = document.getElementById('boton-fuego')
+    botonFuego.disabled = true 
+    let botonAgua = document.getElementById('boton-agua')
+    botonAgua.disabled = true 
+    let botonTierra = document.getElementById('boton-tierra')
+    botonTierra.disabled = true
+}
 
-//función y ecuacion matemática para que la pc escoja aleatoriamnete 
+// Función para reiniciar juego con el metodo location.reload
+function reiniciarJuego(){
+    location.reload()
+}
+
+//Función y ecuacion matemática para que la pc escoja aleatoriamnete 
 function numeroAleatorio( min , max ) {
     return Math.floor( Math.random() * ( max - min + 1 ) + min );
 }
