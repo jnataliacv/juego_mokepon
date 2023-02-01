@@ -1,11 +1,20 @@
+// variale global para ataque 
+let ataqueJugador
 
 //Función para seleccionar el elemento mascota/registro del evento boton de seleccionar mascota jugador 
 function iniciarJuego() {
     let botonMascotaJugador = document.getElementById('boton-mascota')
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
+    
+    let botonFuego = document.getElementById('boton-fuego')
+    botonFuego.addEventListener('click', ataqueFuego)
+    let botonAgua = document.getElementById('boton-agua')
+    botonAgua.addEventListener('click', ataqueAgua)
+    let botonTierra = document.getElementById('boton-tierra')
+    botonTierra.addEventListener('click', ataqueTierra)
 }
 
-//Funcion y l
+//Función y lógica de la mascota que escoge el jugador 
 function seleccionarMascotaJugador() {
     let inputHipodoge = document.getElementById('hipodoge')
     let inputCapipepo = document.getElementById('capipepo')
@@ -34,6 +43,7 @@ function seleccionarMascotaJugador() {
     seleccionarMascotaEnemigo()
 }
 
+//Función y lógica de la mascota que escoge el pc
 function seleccionarMascotaEnemigo() {
     let ataqueAleatorio = numeroAleatorio(1,6)
     let spanMascotaEnemigo = document.getElementById('mascota-enemigo')
@@ -53,6 +63,20 @@ function seleccionarMascotaEnemigo() {
     }
 
 }
+
+function ataqueFuego() {
+    ataqueJugador = 'FUEGO'
+    alert(ataqueJugador)
+}
+function ataqueAgua() {
+    ataqueJugador = 'AGUA'
+    alert(ataqueJugador)
+}
+function ataqueAleatorio() {
+    ataqueJugador = 'TIERRA'
+    alert(ataqueJugador)
+}
+//función y ecuacion matemática para que la pc escoja aleatoriamnete 
 function numeroAleatorio( min , max ) {
     return Math.floor( Math.random() * ( max - min + 1 ) + min );
 }
