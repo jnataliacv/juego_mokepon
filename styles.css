@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+
+body{
+    font-family: 'Itim', cursive;
+    background-image: url("mascota/fondo.png");
+    background-size: cover;
+    
+   
+}
+
+#seleccionar-mascota {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.titulo {
+    color: rgb(16, 57, 140);
+    font-size:80px;
+}
+.subtitulo {
+    color: royalblue;
+    font-size: 30px;
+}
+.tarjetas-mascotas{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+    box-sizing:border-box;
+    margin: 10px 90px 20px 90px;
+    gap: 20px  
+}
+.tarjeta-de-mokepon{
+    width: 150px;
+    height: 180px;
+    background: cadetblue;
+    padding: 30px;
+    box-sizing:border-box;
+    margin: 20px 60px 20px 60px;
+    border: 2px dashed rgb(113, 20, 220);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    color:  rgb(199, 229, 255);
+    font-size: 20px;
+
+}
+.tarjeta-de-mokepon img {
+    width: 90px;
+}
+#boton-mascota{
+    width: 120px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 20px;
+    border: 2px dashed rgb(113, 20, 220);
+    background: rgb(56, 117, 118);
+    font-family: cursive;
+    color: rgb(199, 229, 255);
+
+}
+input{
+    display: none;
+}
