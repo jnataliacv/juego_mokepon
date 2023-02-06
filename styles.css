@@ -57,7 +57,7 @@ body{
     height: 50px;
     font-size: 20px;
     border-radius: 20px;
-    border: 2px dashed rgb(113, 20, 220);
+    border: 2px dashed transparent;
     background: rgb(56, 117, 118);
     font-family: cursive;
     color: rgb(199, 229, 255);
@@ -65,4 +65,34 @@ body{
 }
 input{
     display: none;
+}
+#seleccionar-ataque {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.botonataque {
+    background-color: rgb(56, 117, 118);
+    padding: 10px;
+    box-sizing:border-box;
+    border-radius: 20px;
+    border: 2px dashed transparent;
+    width: 100px;
+    color: rgb(199, 229, 255);
+    font-family: cursive;
+}
+#mensaje {
+    width: 200px;
+    background: cadetblue;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#boton-reiniciar{
+    border: none;
+    color: rgb(199, 229, 255);
+    font-family: cursive;
 }
