@@ -165,8 +165,8 @@ function revisarVidas(){
 function crearMensaje(resultado) {
     //variable para seleccionar el elemento mensaje del HTML
     let sectionMensajes = document.getElementById('resultado')
-    let ataqueJugador = document.getElementById('ataqueJugador')
-    let ataqueEnemigo = document.getElementById('ataqueEnemigo')
+    let ataqueJugador = document.getElementById('ataque-del-Jugador')
+    let ataqueEnemigo = document.getElementById('ataque-del-Enemigo')
 
     //variable para crear un parrafo con el mensaje de ataque tanto del jugador como el pc
     let nuevoAtaqueJugador = document.createElement('p')
