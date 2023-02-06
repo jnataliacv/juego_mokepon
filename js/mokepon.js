@@ -35,7 +35,7 @@ function seleccionarMascotaJugador() {
 
     //variable para mostrar la sección de seleccionar ataque
     let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
-    sectionSeleccionarAtaque.style.display = 'block'
+    sectionSeleccionarAtaque.style.display = 'flex'
 
     //Variables para preguntar al condicional checked seleccionando el elemento del input de cada mascpta del HTML 
     let inputHipodoge = document.getElementById('hipodoge')
@@ -164,22 +164,30 @@ function revisarVidas(){
 //Función para crear mensaje del ataque 
 function crearMensaje(resultado) {
     //variable para seleccionar el elemento mensaje del HTML
-    let sectionMensajes = document.getElementById('mensaje')
+    let sectionMensajes = document.getElementById('resultado')
+    let ataqueJugador = document.getElementById('ataqueJugador')
+    let ataqueEnemigo = document.getElementById('ataqueEnemigo')
 
     //variable para crear un parrafo con el mensaje de ataque tanto del jugador como el pc
-    let parrafo = document.createElement('p')
-    parrafo.innerHTML = 'Tu mascota ataco con ' + ataqueJugador + ', las mascotas del enemigo atacó con ' + ataqueEnemigo + ' ' +  resultado
+    let nuevoAtaqueJugador = document.createElement('p')
+    let nuevoAtaqueEnemigo = document.createElement('p')
+
+    sectionMensajes.innerHTML = resultado
+    nuevoAtaqueJugador.innerHTML = ataqueJugador
+    nuevoAtaqueEnemigo.innerHTML = ataqueEnemigo
+   
     //Agregar al final del cuerpo del documento con appendChild
-    sectionMensajes.appendChild(parrafo)
+   
+    ataqueJugador.appendChild(nuevoAtaqueJugador)
+    ataqueEnemigo.appendChild(nuevoAtaqueEnemigo)
 }
 
 //Función para crear mensaje final de la partida 
 function crearMensajeFinal(resultadoFinal) {
     //variable para unir con el parrafo mensaje que salga la parte final si ganaste o perdiste
-    let sectionMensajes = document.getElementById('mensaje')
-    let parrafo = document.createElement('p')
-    parrafo.innerHTML = resultadoFinal
-    sectionMensajes.appendChild(parrafo)
+    let sectionMensajes = document.getElementById('resultado')
+    sectionMensajes.innerHTML = resultadoFinal
+    
 
     //variables con disabled para que no funcionen mas los botones de ataque
     let botonFuego = document.getElementById('boton-fuego')
