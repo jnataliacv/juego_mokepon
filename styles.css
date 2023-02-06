@@ -23,7 +23,7 @@ body{
     color: royalblue;
     font-size: 30px;
 }
-.tarjetas-mascotas{
+.tarjetas-mascotas, .tarjetas-ataques{
     display: flex;
     flex-wrap: wrap;
     gap: 50px;
@@ -95,4 +95,24 @@ input{
     border: none;
     color: rgb(199, 229, 255);
     font-family: cursive;
+}
+.ataques {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    color: rgb(0, 103, 192);
+}
+#vidas-jugador, #vidas-enemigo {
+    font-size: 32px;
+    margin-bottom: 0;
+}
+.ataques-jugador, .ataques-enemigo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+/* ajuste para ver tanto en computador y celular sin que se corte */
+@media (max-width: 360px) {
+    .tarjetas .tarjetas-ataques {
+      flex-direction: column;
+    }
 }
