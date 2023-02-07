@@ -56,7 +56,7 @@ body{
     font-size: 20px;
     border-radius: 20px;
     border: 2px dashed transparent;
-    background: rgb(56, 117, 118);
+    background-image: radial-gradient(circle at 50% -20.71%, #cfa8ff 0, #9d8bff 25%, #6c6cd8 50%, #3f4ea4 75%, #153375 100%);
     font-family: cursive;
     color: rgb(199, 229, 255);
 
@@ -73,7 +73,7 @@ input:checked + label {
     align-items: center;
 }
 .botonataque {
-    background-color: rgb(56, 117, 118);
+    background-image: radial-gradient(circle at 50% -20.71%, #cfa8ff 0, #9d8bff 25%, #6c6cd8 50%, #3f4ea4 75%, #153375 100%);
     padding: 10px;
     box-sizing:border-box;
     border-radius: 20px;
@@ -84,26 +84,32 @@ input:checked + label {
 }
 #mensaje {
     width: 210px;
-    background: cadetblue;
+    background-image: linear-gradient(180deg, #a6ffff 0, #a2edff 25%, #9dd5f2 50%, #96bed5 75%, #8ea8b9 100%);
     padding: 10px;
     margin-top: 10px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    color: rgb(199, 229, 255);
+    color: rgb(242, 247, 252);
     font-family: cursive;
     font-size: 20px;
 }
 #boton-reiniciar{
+    width: 150px;
     border: none;
-    color: rgb(62, 65, 251);
+    border-radius: 10px;
+    background-image: radial-gradient(circle at 50% -20.71%, #cfa8ff 0, #9d8bff 25%, #6c6cd8 50%, #3f4ea4 75%, #153375 100%);
+    color: rgb(199, 229, 255);
     font-family: cursive;
 }
 .ataques {
     display: grid;
     grid-template-columns: 100px 100px;
-    color: rgb(0, 103, 192);
+    color: rgb(199, 229, 255);
+    margin: 0px 60px 20px 10px;
+    gap: 100px; 
+    
 }
 #vidas-jugador, #vidas-enemigo {
     font-size: 32px;
@@ -113,6 +119,12 @@ input:checked + label {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 150px;
+    background-image: radial-gradient(circle at 50% -20.71%, #ff9fff 0, #c787ff 25%, #8f6cd8 50%, #5c51a9 75%, #31397e 100%);
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 20px;
+   
 }
 /* ajuste para ver tanto en computador y celular sin que se corte */
 @media (max-width: 360px) {
