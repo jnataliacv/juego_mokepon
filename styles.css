@@ -4,9 +4,7 @@
 body{
     font-family: 'Itim', cursive;
     background-image: url("mascota/fondo.png");
-    background-size: cover;
-    
-   
+    background-size: cover; 
 }
 
 #seleccionar-mascota {
@@ -66,6 +64,9 @@ body{
 input{
     display: none;
 }
+input:checked + label {
+    background-color: darkseagreen;
+}
 #seleccionar-ataque {
     display: flex;
     flex-direction: column;
@@ -82,18 +83,21 @@ input{
     font-family: cursive;
 }
 #mensaje {
-    width: 200px;
+    width: 210px;
     background: cadetblue;
-    padding: 20px;
-    margin-top: 20px;
+    padding: 10px;
+    margin-top: 10px;
     border-radius: 20px;
     display: flex;
     align-items: center;
     flex-direction: column;
+    color: rgb(199, 229, 255);
+    font-family: cursive;
+    font-size: 20px;
 }
 #boton-reiniciar{
     border: none;
-    color: rgb(199, 229, 255);
+    color: rgb(62, 65, 251);
     font-family: cursive;
 }
 .ataques {

@@ -165,21 +165,21 @@ function revisarVidas(){
 function crearMensaje(resultado) {
     //variable para seleccionar el elemento mensaje del HTML
     let sectionMensajes = document.getElementById('resultado')
-    let ataqueJugador = document.getElementById('ataque-del-Jugador')
-    let ataqueEnemigo = document.getElementById('ataque-del-Enemigo')
+    let ataquedelJugador = document.getElementById('ataque-del-Jugador')
+    let ataquedelEnemigo = document.getElementById('ataque-del-Enemigo')
 
-    //variable para crear un parrafo con el mensaje de ataque tanto del jugador como el pc
+    //variable para crear un parrafo con el mensaje de ataque tanto del jugador como el pc 
     let nuevoAtaqueJugador = document.createElement('p')
     let nuevoAtaqueEnemigo = document.createElement('p')
 
+    //"Sobre escribir el mensaje del html "
     sectionMensajes.innerHTML = resultado
     nuevoAtaqueJugador.innerHTML = ataqueJugador
     nuevoAtaqueEnemigo.innerHTML = ataqueEnemigo
    
     //Agregar al final del cuerpo del documento con appendChild
-   
-    ataqueJugador.appendChild(nuevoAtaqueJugador)
-    ataqueEnemigo.appendChild(nuevoAtaqueEnemigo)
+    ataquedelJugador.appendChild(nuevoAtaqueJugador)
+    ataquedelEnemigo.appendChild(nuevoAtaqueEnemigo)
 }
 
 //Función para crear mensaje final de la partida 
