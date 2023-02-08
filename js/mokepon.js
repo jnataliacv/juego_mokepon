@@ -1,52 +1,123 @@
-// variale global para ataque y cambios de vidas
+const sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
+const sectionReiniciar = document.getElementById('reiniciar')
+const botonMascotaJugador = document.getElementById('boton-mascota')
+const botonFuego = document.getElementById('boton-fuego')
+const botonAgua = document.getElementById('boton-agua')
+const botonTierra = document.getElementById('boton-tierra')
+const botonReiniciar = document.getElementById('boton-reiniciar')
+
+const sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
+const inputHipodoge = document.getElementById('hipodoge')
+const inputCapipepo = document.getElementById('capipepo')
+const inputRatigueya = document.getElementById('ratigueya')
+const inputLangostelvis = document.getElementById('langostelvis')
+const inputTucapalma = document.getElementById('tucapalma')
+const inputPydos = document.getElementById('pydos')
+const spanMascotaJugador = document.getElementById('mascota-jugador')
+
+const spanMascotaEnemigo = document.getElementById('mascota-enemigo')
+const spanVidasJugador = document.getElementById('vidas-jugador')
+const spanVidasEnemigo = document.getElementById('vidas-enemigo')
+const sectionMensajes = document.getElementById('resultado')
+const ataquedelJugador = document.getElementById('ataque-del-Jugador')
+const ataquedelEnemigo = document.getElementById('ataque-del-Enemigo')
+const contenedorTarjetas = document.getElementById('contenedorTarjetas')
+
+let mokepones = []
 let ataqueJugador
 let ataqueEnemigo
+let opcionDeMokepones
+
 let vidasJugador = 3
 let vidasEnemigo = 3
 
+class Mokepon {
+    constructor(nombre, foto, vida){
+        this.nombre = nombre
+        this.foto = foto
+        this.vida = vida
+        this.ataques = []
+    }
+}
+let hipodoge = new Mokepon('Hipodoge', 'mascota/Hipopotamo.png.png', 5)
+let capipepo = new Mokepon('Capipepo', 'mascota/cocodrilo.png.png', 5)
+let ratigueya = new Mokepon('Ratigueya', 'mascota/ratigueya.png.png', 5)
+let langostelvis = new Mokepon('Langostelvis', 'mascota/langosta.png.png', 5)
+let tucapalma = new Mokepon('Tucapalma', 'mascota/tucan.png.png', 5)
+let pydos = new Mokepon('Pydos', 'mascota/pydos.png.png', 5)
+
+hipodoge.ataques.push(
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
+capipepo.ataques.push(
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
+ratigueya.ataques.push(
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'},
+)
+langostelvis.ataques.push(
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'},
+)
+tucapalma.ataques.push(
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
+pydos.ataques.push(
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
+mokepones.push(hipodoge,capipepo,ratigueya,langostelvis,tucapalma,pydos)
+
 //Función para seleccionar el elemento mascota/registro del evento boton de seleccionar mascota jugador 
 function iniciarJuego() {
-
-    //variables para ocultar las secciones de ataque y reinicio con la propiedad display 
-    let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
     sectionSeleccionarAtaque.style.display = 'none'
-    let sectionReiniciar = document.getElementById('reiniciar')
+
+    mokepones.forEach((mokepon) => {
+        opcionDeMokepones = `
+        <input type="radio" name="mascota" id=${mokepon.nombre}/>
+        <label class="tarjeta-de-mokepon" for=${mokepon.nombre}>
+            <p>${mokepon.nombre}</p> 
+            <img src=${mokepon.foto} alt=${mokepon.nombre}>
+        </label>
+        `
+    contenedorTarjetas.innerHTML += opcionDeMokepones
+    })
     sectionReiniciar.style.display = 'none'
 
-    //variables para seleccionando el boton con el id del HTML 'getElementById' y darle clicck con 'addEventListener'
-    let botonMascotaJugador = document.getElementById('boton-mascota')
+    //Darle clicck con 'addEventListener'
     botonMascotaJugador.addEventListener('click', seleccionarMascotaJugador)
-
-    let botonFuego = document.getElementById('boton-fuego')
     botonFuego.addEventListener('click', ataqueFuego)
-    let botonAgua = document.getElementById('boton-agua')
     botonAgua.addEventListener('click', ataqueAgua)
-    let botonTierra = document.getElementById('boton-tierra')
     botonTierra.addEventListener('click', ataqueTierra)
-    let botonReiniciar = document.getElementById('boton-reiniciar')
     botonReiniciar.addEventListener('click', reiniciarJuego)
 }
 
 //Función y lógica de la mascota que escoge el jugador 
 function seleccionarMascotaJugador() {
-    //variable para ocultar la sección de seleccionar mascota
-    let sectionSeleccionarMascota = document.getElementById('seleccionar-mascota')
     sectionSeleccionarMascota.style.display = 'none'
-
-    //variable para mostrar la sección de seleccionar ataque
-    let sectionSeleccionarAtaque = document.getElementById('seleccionar-ataque')
     sectionSeleccionarAtaque.style.display = 'flex'
-
-    //Variables para preguntar al condicional checked seleccionando el elemento del input de cada mascpta del HTML 
-    let inputHipodoge = document.getElementById('hipodoge')
-    let inputCapipepo = document.getElementById('capipepo')
-    let inputRatigueya = document.getElementById('ratigueya')
-    let inputLangostelvis = document.getElementById('langostelvis')
-    let inputTucapalma = document.getElementById('tucapalma')
-    let inputPydos = document.getElementById('pydos')
-
-    //varaiable para seleccionar mascota y que nos salga en nuestro mensaje con span
-    let spanMascotaJugador = document.getElementById('mascota-jugador')
 
     //condicionales para preguntar que mascota a sido selecionado con checked  
     if (inputHipodoge.checked) {
@@ -64,16 +135,13 @@ function seleccionarMascotaJugador() {
     } else {
         alert('Debes seleccionar una mascota')
     }
-
     seleccionarMascotaEnemigo()
 }
 
 //Función y lógica de la mascota que escoge el pc
 function seleccionarMascotaEnemigo() {
-
     //varibles para que el pc de forma aleatoria escoja la mascota y salga el mensaje con span
     let mascotaAleatorio = numeroAleatorio(1,6)
-    let spanMascotaEnemigo = document.getElementById('mascota-enemigo')
 
     //logica de condicional para la mascota aleatoria del pc
     if (mascotaAleatorio == 1) {
@@ -125,10 +193,6 @@ function ataqueAleatorioEnemigo() {
 
 //Función para ver el resultado del combate por cada ataque
 function combate() {
-    // Varibales para las vidas del jugador y pc, y que salgan en el mensaje con span
-    let spanVidasJugador = document.getElementById('vidas-jugador')
-    let spanVidasEnemigo = document.getElementById('vidas-enemigo')
-
     //Logica para el resultado del ataque y que se le vaya quintando vidas al perdedor
     if ( ataqueJugador == ataqueEnemigo ) {
         crearMensaje( "¡EMPATE! 🤼" );
@@ -158,16 +222,10 @@ function revisarVidas(){
     } else if (vidasJugador == 0) {
         crearMensajeFinal('Lo siento, perdiste 😢')
     }
-    
 } 
 
 //Función para crear mensaje del ataque 
 function crearMensaje(resultado) {
-    //variable para seleccionar el elemento mensaje del HTML
-    let sectionMensajes = document.getElementById('resultado')
-    let ataquedelJugador = document.getElementById('ataque-del-Jugador')
-    let ataquedelEnemigo = document.getElementById('ataque-del-Enemigo')
-
     //variable para crear un parrafo con el mensaje de ataque tanto del jugador como el pc 
     let nuevoAtaqueJugador = document.createElement('p')
     let nuevoAtaqueEnemigo = document.createElement('p')
@@ -184,21 +242,10 @@ function crearMensaje(resultado) {
 
 //Función para crear mensaje final de la partida 
 function crearMensajeFinal(resultadoFinal) {
-    //variable para unir con el parrafo mensaje que salga la parte final si ganaste o perdiste
-    let sectionMensajes = document.getElementById('resultado')
     sectionMensajes.innerHTML = resultadoFinal
-    
-
-    //variables con disabled para que no funcionen mas los botones de ataque
-    let botonFuego = document.getElementById('boton-fuego')
     botonFuego.disabled = true 
-    let botonAgua = document.getElementById('boton-agua')
     botonAgua.disabled = true 
-    let botonTierra = document.getElementById('boton-tierra')
     botonTierra.disabled = true
-
-    //variable para mostrar el boton de reiniciar 
-    let sectionReiniciar = document.getElementById('reiniciar')
     sectionReiniciar.style.display = 'block'
 }
 
