@@ -15,6 +15,9 @@ const ataquedelEnemigo = document.getElementById('ataque-del-Enemigo')
 const contenedorTarjetas = document.getElementById('contenedorTarjetas')
 const contenedorAtaques = document.getElementById('contenedorAtaques')
 
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById('mapa')
+
 let mokepones = []
 let ataqueJugador = []
 let ataqueEnemigo = []
@@ -38,6 +41,8 @@ let victoriasJugador = 0
 let victoriasEnemigo= 0
 let vidasJugador = 3
 let vidasEnemigo = 3
+
+
 
 // Clase con su constructor de lo que lleva cada objeto 
 class Mokepon {
@@ -105,6 +110,7 @@ mokepones.push(hipodoge,capipepo,ratigueya,langostelvis,tucapalma,pydos)
 //Función para seleccionar el elemento mascota/registro del evento boton de seleccionar mascota jugador 
 function iniciarJuego() {
     sectionSeleccionarAtaque.style.display = 'none'
+    sectionVerMapa.style.display = 'none'
 
     //Iteración del HTML para cada tarjeta del mokepon 
     mokepones.forEach((mokepon) => {
@@ -134,8 +140,11 @@ function iniciarJuego() {
 
 //Función y lógica de la mascota que escoge el jugador 
 function seleccionarMascotaJugador() {
+
     sectionSeleccionarMascota.style.display = 'none'
-    sectionSeleccionarAtaque.style.display = 'flex'
+
+    //sectionSeleccionarAtaque.style.display = 'flex'
+    sectionVerMapa.style.display = 'flex'
 
     //condicionales para preguntar que mascota a sido selecionado con checked  
     if (inputHipodoge.checked) {

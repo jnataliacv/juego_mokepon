@@ -126,6 +126,17 @@ input:checked + label {
     border-radius: 20px;
    
 }
+
+#ver-mapa {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#mapa {
+    width: 300px;
+    height: 200px;
+    border: 2px solid white;
+}
 /* ajuste para ver tanto en computador y celular sin que se corte */
 @media (max-width: 360px) {
     .tarjetas .tarjetas-ataques {
