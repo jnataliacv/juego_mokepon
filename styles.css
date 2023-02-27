@@ -133,8 +133,6 @@ input:checked + label {
     justify-content: center;
 }
 #mapa {
-    width: 300px;
-    height: 200px;
     border: 2px solid white;
 }
 /* ajuste para ver tanto en computador y celular sin que se corte */
