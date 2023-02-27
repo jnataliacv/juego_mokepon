@@ -46,20 +46,31 @@ let lienzo = mapa.getContext("2d")
 let intervalo
 let mapaBackground = new Image()
 mapaBackground.src = './mascota/mapa.png'
+let alturaQueBuscamos
+let anchoDelMapa = window.innerWidth - 20
+const anchoMaximoDelMapa = 350
 
+if (anchoDelMapa > anchoMaximoDelMapa) {
+    anchoDelMapa = anchoMaximoDelMapa - 20
+}
+
+alturaQueBuscamos = anchoDelMapa * 600 / 800
+
+mapa.width = anchoDelMapa
+mapa.height = alturaQueBuscamos
 
 
 // Clase con su constructor de lo que lleva cada objeto 
 class Mokepon {
-    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10){
+    constructor(nombre, foto, vida, fotoMapa){
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-        this.x = x
-        this.y = y
         this.ancho = 40
         this.alto = 40
+        this.x = numeroAleatorio(0, mapa.width - this.ancho)
+        this.y = numeroAleatorio(0, mapa.height -this.alto)
         this.mapaFoto = new Image()
         this.mapaFoto.src = fotoMapa
         this.velocidadX = 0
@@ -108,7 +119,21 @@ capipepo.ataques.push(
     {nombre: '🔥', id: 'boton-fuego'},
     {nombre: '🌎', id: 'boton-tierra'},
 )
+capipepoEnemigo.ataques.push(
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
 ratigueya.ataques.push(
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'},
+)
+ratigueyaEnemigo.ataques.push(
     {nombre: '🌎', id: 'boton-tierra'},
     {nombre: '🌎', id: 'boton-tierra'},
     {nombre: '🌎', id: 'boton-tierra'},
@@ -122,6 +147,13 @@ langostelvis.ataques.push(
     {nombre: '🔥', id: 'boton-fuego'},
     {nombre: '💧', id: 'boton-agua'},
 )
+langostelvisEnemigo.ataques.push(
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'},
+)
 tucapalma.ataques.push(
     {nombre: '🔥', id: 'boton-fuego'},
     {nombre: '🔥', id: 'boton-fuego'},
@@ -129,7 +161,21 @@ tucapalma.ataques.push(
     {nombre: '💧', id: 'boton-agua'},
     {nombre: '🌎', id: 'boton-tierra'},
 )
+tucapalmaEnemigo.ataques.push(
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
 pydos.ataques.push(
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
+pydosEnemigo.ataques.push(
     {nombre: '🔥', id: 'boton-fuego'},
     {nombre: '🔥', id: 'boton-fuego'},
     {nombre: '🔥', id: 'boton-fuego'},
@@ -175,9 +221,6 @@ function seleccionarMascotaJugador() {
 
     sectionSeleccionarMascota.style.display = 'none'
 
-    //sectionSeleccionarAtaque.style.display = 'flex'
-    
-
     //condicionales para preguntar que mascota a sido selecionado con checked  
     if (inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
@@ -204,7 +247,6 @@ function seleccionarMascotaJugador() {
     extraerAtaques(mascotaJugador)
     sectionVerMapa.style.display = 'flex'
     iniciarMapa()
-    seleccionarMascotaEnemigo()
 }
 function extraerAtaques(mascotaJugador){
     let ataques
@@ -382,6 +424,14 @@ function pintarCanvas() {
     langostelvisEnemigo.pintarMokepon()
     tucapalmaEnemigo.pintarMokepon()
     pydosEnemigo.pintarMokepon()
+    if (mascotaJugadorObjeto.velocidadX !== 0 || mascotaJugadorObjeto.velocidadY !== 0) {
+        revisarColision(hipodogeEnemigo)
+        revisarColision(capipepoEnemigo)
+        revisarColision(ratigueyaEnemigo)
+        revisarColision(langostelvisEnemigo)
+        revisarColision(tucapalmaEnemigo)
+        revisarColision(pydosEnemigo)
+    }
 }
 // Función para mover nuestro mokepon con su respectiva velocidad y detener el movimiendo 
 function moverDerecha() {
@@ -426,8 +476,6 @@ function sePresionoUnaTecla(event) {
 }
 
 function iniciarMapa() {
-    mapa.width = 620
-    mapa.height = 420
     mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador)
     intervalo = setInterval(pintarCanvas, 50)
     
@@ -443,4 +491,31 @@ function obtenerObjetoMascota() {
         
     }
 }
+function revisarColision(enemigo) {
+    const arribaEnemigo = enemigo.y
+    const abajoEnemigo = enemigo.y + enemigo.alto
+    const derechaEnemigo = enemigo.x + enemigo.ancho
+    const izquierdaEnemigo = enemigo.x
+
+    const arribaMascota = mascotaJugadorObjeto.y
+    const abajoMascota = mascotaJugadorObjeto.y + mascotaJugadorObjeto.alto
+    const derechaMascota = mascotaJugadorObjeto.x + mascotaJugadorObjeto.ancho
+    const izquierdaMascota =  mascotaJugadorObjeto.x
+
+    if(
+        abajoMascota < arribaEnemigo ||
+        arribaMascota > abajoEnemigo ||
+        derechaMascota < izquierdaEnemigo ||
+        izquierdaMascota > derechaEnemigo
+    ) {
+        return
+    }
+    detenerMovimiento()
+    clearInterval(intervalo)
+    console.log('Se detecto una colision');
+    sectionSeleccionarAtaque.style.display='flex'
+    sectionVerMapa.style.display='none'
+    seleccionarMascotaEnemigo(enemigo)}
+
+
 window.addEventListener('load', iniciarJuego)
