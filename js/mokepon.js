@@ -29,6 +29,7 @@ let inputLangostelvis
 let inputTucapalma  
 let inputPydos  
 let mascotaJugador
+let mascotaJugadorObjeto
 let ataquesMokepon
 let ataquesMokeponEnemigo
 let botonFuego 
@@ -41,25 +42,56 @@ let victoriasJugador = 0
 let victoriasEnemigo= 0
 let vidasJugador = 3
 let vidasEnemigo = 3
+let lienzo = mapa.getContext("2d")
+let intervalo
+let mapaBackground = new Image()
+mapaBackground.src = './mascota/mapa.png'
 
 
 
 // Clase con su constructor de lo que lleva cada objeto 
 class Mokepon {
-    constructor(nombre, foto, vida){
+    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10){
         this.nombre = nombre
         this.foto = foto
         this.vida = vida
         this.ataques = []
-    }
-}
+        this.x = x
+        this.y = y
+        this.ancho = 40
+        this.alto = 40
+        this.mapaFoto = new Image()
+        this.mapaFoto.src = fotoMapa
+        this.velocidadX = 0
+        this.velocidadY = 0
+        }
+
+    pintarMokepon(){
+        lienzo.drawImage(
+            this.mapaFoto,
+            this.x,
+            this.y,
+            this.ancho,
+            this.alto
+            )
+        }
+        }
+
+    
 //Variables de cada objeto con su informaciòn
-let hipodoge = new Mokepon('Hipodoge', 'mascota/Hipopotamo.png.png', 5)
-let capipepo = new Mokepon('Capipepo', 'mascota/cocodrilo.png.png', 5)
-let ratigueya = new Mokepon('Ratigueya', 'mascota/ratigueya.png.png', 5)
-let langostelvis = new Mokepon('Langostelvis', 'mascota/langosta.png.png', 5)
-let tucapalma = new Mokepon('Tucapalma', 'mascota/tucan.png.png', 5)
-let pydos = new Mokepon('Pydos', 'mascota/pydos.png.png', 5)
+let hipodoge = new Mokepon('Hipodoge', 'mascota/Hipopotamo.png.png', 5, 'mascota/Hipopotamo.png.png')
+let capipepo = new Mokepon('Capipepo', 'mascota/cocodrilo.png.png', 5, 'mascota/cocodrilo.png.png')
+let ratigueya = new Mokepon('Ratigueya', 'mascota/ratigueya.png.png', 5, 'mascota/ratigueya.png.png')
+let langostelvis = new Mokepon('Langostelvis', 'mascota/langosta.png.png', 5, 'mascota/langosta.png.png')
+let tucapalma = new Mokepon('Tucapalma', 'mascota/tucan.png.png', 5, 'mascota/tucan.png.png')
+let pydos = new Mokepon('Pydos', 'mascota/pydos.png.png', 5, 'mascota/pydos.png.png')
+
+let hipodogeEnemigo = new Mokepon('Hipodoge', 'mascota/Hipopotamo.png.png', 5, 'mascota/Hipopotamo.png.png', 80, 120)
+let capipepoEnemigo = new Mokepon('Capipepo', 'mascota/cocodrilo.png.png', 5, 'mascota/cocodrilo.png.png', 350, 195)
+let ratigueyaEnemigo = new Mokepon('Ratigueya', 'mascota/ratigueya.png.png', 5, 'mascota/ratigueya.png.png', 240, 120)
+let langostelvisEnemigo = new Mokepon('Langostelvis', 'mascota/langosta.png.png', 5, 'mascota/langosta.png.png', 250, 195)
+let tucapalmaEnemigo = new Mokepon('Tucapalma', 'mascota/tucan.png.png', 5, 'mascota/tucan.png.png',430, 245)
+let pydosEnemigo = new Mokepon('Pydos', 'mascota/pydos.png.png', 5, 'mascota/pydos.png.png',460, 275)
 
 //Agregar cada ataque en el array de cada objeto  
 hipodoge.ataques.push(
@@ -144,7 +176,7 @@ function seleccionarMascotaJugador() {
     sectionSeleccionarMascota.style.display = 'none'
 
     //sectionSeleccionarAtaque.style.display = 'flex'
-    sectionVerMapa.style.display = 'flex'
+    
 
     //condicionales para preguntar que mascota a sido selecionado con checked  
     if (inputHipodoge.checked) {
@@ -170,6 +202,8 @@ function seleccionarMascotaJugador() {
     }
 
     extraerAtaques(mascotaJugador)
+    sectionVerMapa.style.display = 'flex'
+    iniciarMapa()
     seleccionarMascotaEnemigo()
 }
 function extraerAtaques(mascotaJugador){
@@ -329,5 +363,84 @@ function reiniciarJuego(){
 function numeroAleatorio( min , max ) {
     return Math.floor( Math.random() * ( max - min + 1 ) + min );
 }
+//Función para dibujar con drawImage y limpiar los movimientos con clearRect del mokepon
+function pintarCanvas() {
+    mascotaJugadorObjeto.x = mascotaJugadorObjeto.x + mascotaJugadorObjeto.velocidadX
+    mascotaJugadorObjeto.y = mascotaJugadorObjeto.y + mascotaJugadorObjeto.velocidadY
+    lienzo.clearRect(0, 0, mapa.width, mapa.height)
+    lienzo.drawImage(
+        mapaBackground,
+        0,
+        0,
+        mapa.width,
+        mapa.height
+    )
+    mascotaJugadorObjeto.pintarMokepon()
+    hipodogeEnemigo.pintarMokepon()
+    capipepoEnemigo.pintarMokepon()
+    ratigueyaEnemigo.pintarMokepon()
+    langostelvisEnemigo.pintarMokepon()
+    tucapalmaEnemigo.pintarMokepon()
+    pydosEnemigo.pintarMokepon()
+}
+// Función para mover nuestro mokepon con su respectiva velocidad y detener el movimiendo 
+function moverDerecha() {
+    mascotaJugadorObjeto.velocidadX = 5
+}
 
+function moverIzquierda() {
+    mascotaJugadorObjeto.velocidadX = -5
+}
+
+function moverAbajo() {
+    mascotaJugadorObjeto.velocidadY = 5
+}
+
+function moverArriba() {
+    mascotaJugadorObjeto.velocidadY = -5
+}
+
+function detenerMovimiento() {
+    mascotaJugadorObjeto.velocidadX = 0
+    mascotaJugadorObjeto.velocidadY = 0
+}
+
+
+function sePresionoUnaTecla(event) {
+    switch (event.key) {
+        case 'ArrowUp':
+            moverArriba()
+            break
+        case 'ArrowDown':
+            moverAbajo()
+            break
+        case 'ArrowLeft':
+            moverIzquierda()
+            break
+        case 'ArrowRight':
+            moverDerecha()
+            break
+        default:
+            break
+    }
+}
+
+function iniciarMapa() {
+    mapa.width = 620
+    mapa.height = 420
+    mascotaJugadorObjeto = obtenerObjetoMascota(mascotaJugador)
+    intervalo = setInterval(pintarCanvas, 50)
+    
+    window.addEventListener('keydown', sePresionoUnaTecla)
+
+    window.addEventListener('keyup', detenerMovimiento)
+}
+function obtenerObjetoMascota() {
+    for (let i = 0; i < mokepones.length; i++) {
+        if (mascotaJugador === mokepones[i].nombre) {
+            return mokepones[i]
+        }
+        
+    }
+}
 window.addEventListener('load', iniciarJuego)
