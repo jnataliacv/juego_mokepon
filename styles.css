@@ -17,6 +17,10 @@ body{
     color: rgb(16, 57, 140);
     font-size:80px;
 }
+.titulo-2{
+    color: rgb(16, 57, 140);
+    font-size:50px;
+}
 .subtitulo {
     color: royalblue;
     font-size: 30px;
@@ -132,12 +136,28 @@ input:checked + label {
     align-items: center;
     justify-content: center;
 }
-#mapa {
+#ver-mapa button {
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    background: transparent;
     border: 2px solid white;
-}
+    color: white;
+    background-image: radial-gradient(circle at 50% -20.71%, #cfa8ff 0, #9d8bff 25%, #6c6cd8 50%, #3f4ea4 75%, #153375 100%);
+    font-family: 'Poppins', sans-serif;
+    margin: 10px 0;
+  }
+
 /* ajuste para ver tanto en computador y celular sin que se corte */
-@media (max-width: 360px) {
+@media (max-width: 560px) {
     .tarjetas .tarjetas-ataques {
       flex-direction: column;
     }
 }
+@media (max-width: 300px) {
+    #ver-mapa div {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+  }
