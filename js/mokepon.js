@@ -112,6 +112,13 @@ hipodoge.ataques.push(
     {nombre: '🔥', id: 'boton-fuego'},
     {nombre: '🌎', id: 'boton-tierra'},
 )
+hipodogeEnemigo.ataques.push(
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
 capipepo.ataques.push(
     {nombre: '💧', id: 'boton-agua'},
     {nombre: '💧', id: 'boton-agua'},
@@ -219,8 +226,6 @@ function iniciarJuego() {
 //Función y lógica de la mascota que escoge el jugador 
 function seleccionarMascotaJugador() {
 
-    sectionSeleccionarMascota.style.display = 'none'
-
     //condicionales para preguntar que mascota a sido selecionado con checked  
     if (inputHipodoge.checked) {
         spanMascotaJugador.innerHTML = inputHipodoge.id
@@ -241,8 +246,11 @@ function seleccionarMascotaJugador() {
         spanMascotaJugador.innerHTML = inputPydos.id
         mascotaJugador = inputPydos.id
     } else {
-        alert('Debes seleccionar una mascota')
+        alert('Selecciona una mascota')
+        return
     }
+
+    sectionSeleccionarMascota.style.display = 'none'
 
     extraerAtaques(mascotaJugador)
     sectionVerMapa.style.display = 'flex'
